@@ -1,4 +1,5 @@
 To use make sure you have an input.txt file and output.txt file, and then just run main.py
-Your input.txt should only contain the proof portion of the ND / ST, and not anything before it.
+Your input.txt can contain anything after #check ND / #check ST, comments, and should end at the end of your proof.
 
-Right now it will just renumber in order, but I plan on adding filtering for specific strings to avoid renumbering specific strings.
+To add filters, add them to the "filters.txt" file, seperated by commas. If a line number contains any of a string in a filter, it will not renumber the line.
+By default the filters.txt file contains just 'pr' (useful for premises)

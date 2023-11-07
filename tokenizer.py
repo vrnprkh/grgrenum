@@ -4,6 +4,9 @@ from enum import Enum
 LPAREN = "("
 RPAREN = ")"
 ON_STRING = " on "
+SINGLE_LINE_COMMENT_START = "//"
+MULTILINE_COMMENT_START = "/*"
+MULTILINE_COMMENT_END = "*/"
 
 
 def getIDFromString(inputString: str) -> tuple[str, str, str]:
@@ -102,7 +105,6 @@ class TokenList:
         for char in inputString:
             currentToken += char
 
-            # TEST
             if inSingleLineComment:
                 if char == "\n":
                     inSingleLineComment = False
@@ -110,7 +112,7 @@ class TokenList:
                     currentToken = ""
                 continue
             if inMultiLineComment:
-                if currentToken[-2:] == "*/":
+                if currentToken[-2:] == MULTILINE_COMMENT_END:
                     inMultiLineComment = False
                     newTokens.append(Token(currentToken, TokenType.comment))
                     currentToken = ""
@@ -120,9 +122,9 @@ class TokenList:
             if len(currentToken) >= 2:
                 lastTwo: str = currentToken[-2:]
 
-                if lastTwo == "//":
+                if lastTwo == SINGLE_LINE_COMMENT_START:
                     inSingleLineComment = True
-                elif lastTwo == "/*":
+                elif lastTwo == MULTILINE_COMMENT_START:
                     inMultiLineComment = True
                 if inMultiLineComment or inSingleLineComment:
                     newTokens.append(Token(currentToken[:-2], TokenType.body))
@@ -191,6 +193,18 @@ class TokenList:
             replacement: str = self.tokens[self.initIDtoPos[self.tokens[i].text]].text
             self.tokens[i].text = replacement
 
+    def replaceTokensFilter(self, filter: list[str] = []) -> None:
+        count = 0
+        for i in self.idPos:
+            if any(e in self.tokens[i].text for e in filter):
+                continue
+            count += 1
+            self.tokens[i].text = str(count)
+
+        for i in self.referencePos:
+            replacement: str = self.tokens[self.initIDtoPos[self.tokens[i].text]].text
+            self.tokens[i].text = replacement
+
     def mergeTokens(self) -> str:
         merged: str = ""
 
@@ -200,7 +214,7 @@ class TokenList:
         return merged
 
     def __str__(self) -> str:
-        # for debuggin
+        # for debugging
         outputStr: str = "TOKENS:\n"
         for token in self.tokens:
             outputStr += str(token.kind) + ": " + token.text + "\n"

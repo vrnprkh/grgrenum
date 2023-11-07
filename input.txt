@@ -1,0 +1,20 @@
+// Sample ND Proof
+#check ND
+p | q 
+|-
+!(!p & !q)
+
+pr1) p | q premise
+1) disprove !p & !q {
+    dp0) !p by and_e on 1
+    dp1) !q by and_e on 1
+    dpcase1) case p { dpcase11) false by not_e on dp0, dpcase1 } // random comment with lineNumbers1) and on 1, 2-3
+    dpcase2) case q { dpcase21) false by not_e on dp1, dpcase2 }
+    /* random multiLineComment
+
+    end of comment
+    */
+    dpcases) false by cases on pr1, dpcase1-dpcase11, dpcase2-dpcase21
+}
+dpend) !(!p & !q) by raa on 1-dpcases
+
