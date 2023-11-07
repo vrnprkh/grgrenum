@@ -1,3 +1,7 @@
+You can use: https://www.vrnprkh.dev/grgrenum/
+
+Or you can download it and run it locally.
+
 To use make sure you have an input.txt file and output.txt file, and then just run main.py
 Your input.txt can contain anything after #check ND / #check ST, comments, and should end at the end of your proof.
 
