@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <title>George Renumber</title>
+      <style>
+        body {
+          text-align: center;
+        }
+        #inputString, #filters, button, #copy-button {
+          display: block;
+          margin: 0 auto;
+        }
+        #output-container {
+          width: 50%;
+          margin: 0 auto;
+          text-align: left;
+          padding: 10px;
+          border: 1px solid #ccc;
+          background-color: #f9f9f9;
+          max-height: 300px;
+          overflow: auto; 
+        }
+
+      </style>
+      <script type="module" src="https://pyscript.net/snapshots/2023.11.1.RC3/core.js"></script>
+  </head>
+  <body>
+    <h1>Enter ND / ST Proof below</h1>
+    <textarea id="inputString" rows="10" cols="50"></textarea>
+    <input type="text" id="filters" placeholder="Filters"/>
+    <button py-click="renumber">Renumber Proof!</button>
+    <div id="output-container">
+      <div id="output"></div>
+    </div>
+    <button id="copy-button" onclick="copyToClipboard()">Copy to Clipboard</button>
+    
+    <script type="py" src="./webscript.py" config="./pyscript.json"></script>
+    <script>
+      function copyToClipboard() {
+        var outputDiv = document.getElementById("output");
+        var textArea = document.createElement("textarea");
+        textArea.value = outputDiv.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+    </script>
+  </body>
+</html>
