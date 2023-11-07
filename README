@@ -3,3 +3,5 @@ Your input.txt can contain anything after #check ND / #check ST, comments, and s
 
 To add filters, add them to the "filters.txt" file, seperated by commas. If a line number contains any of a string in a filter, it will not renumber the line.
 By default the filters.txt file contains just 'pr' (useful for premises)
+
+See the sample input.txt, output.txt, and filters.txt provided for an example.
