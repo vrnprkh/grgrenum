@@ -1,0 +1,4 @@
+To use make sure you have an input.txt file and output.txt file, and then just run main.py
+Your input.txt should only contain the proof portion of the ND / ST, and not anything before it.
+
+Right now it will just renumber in order, but I plan on adding filtering for specific strings to avoid renumbering specific strings.
