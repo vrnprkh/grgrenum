@@ -1,25 +1,28 @@
 from pyscript import document
 from enum import Enum
 
+
 def renumber(event):
     input_text = document.querySelector("#inputString")
     inputString = input_text.value
     output_div = document.querySelector("#output")
-    
+
     filters_text = document.querySelector("#filters")
-    filters = [e2 for e2 in ("".join(e.split()) for e in filters_text.value.split(","))if len(e2) > 0]
-    
+    filters = [
+        e2
+        for e2 in ("".join(e.split()) for e in filters_text.value.split(","))
+        if len(e2) > 0
+    ]
+
     newTL = TokenList(inputString)
     newTL.replaceTokensFilter(filters)
     outputStr = newTL.mergeTokens()
     output_div.innerText = outputStr
 
 
-
-
 # super scuffed but i was lazy to figure out imports with pyscript lol
 
-#TOKENIZER.PY BELOW
+# TOKENIZER.PY BELOW
 
 # constants
 LPAREN = "("
@@ -70,7 +73,7 @@ class Token:
 def getReferences(searchText: str) -> list[Token]:
     # assume this is AFTER on string
     splits = ["-", ",", " "]
-    newSearchText: str = ""
+    newSearchText: str = searchText
     lastText: str = ""
     for i, e in enumerate(searchText):
         if e.isalnum() or e in splits:

@@ -10,7 +10,7 @@ pr1) p | q premise
     3) !q by and_e on 1
     4) case p { 5) false by not_e on 2, 4 } // random comment with lineNumbers1) and other things on 1, 2-3
     6) case q { 
-      7) false by not_e on 3, 6 
+      7) false by not_e on 3, 6 // another comment for bug 
     }
     8) false by cases on pr1, 4-5, 6-7
     /*multiLineComment

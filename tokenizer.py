@@ -49,7 +49,7 @@ class Token:
 def getReferences(searchText: str) -> list[Token]:
     # assume this is AFTER on string
     splits = ["-", ",", " "]
-    newSearchText: str = ""
+    newSearchText: str = searchText
     lastText: str = ""
     for i, e in enumerate(searchText):
         if e.isalnum() or e in splits:
